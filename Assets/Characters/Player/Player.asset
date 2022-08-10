@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0432dce704b1d524ea815f3e18519137, type: 3}
+  m_Name: Player
+  m_EditorClassIdentifier: 
+  characterName: Hero
+  health: 30
+  powerDice: {fileID: 11400000, guid: 35b6ca2b1f37ad24e95d9fcb72e8b43f, type: 2}
+  typeDice: {fileID: 11400000, guid: f907ca3d265b75641bd2734abdc95613, type: 2}
