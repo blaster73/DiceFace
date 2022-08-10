@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Test Enemy
   m_EditorClassIdentifier: 
   characterName: Test Enemy
-  health: 30
+  health: 6
   powerDice: {fileID: 11400000, guid: 3694031f873d0be4cbca13591b7a9149, type: 2}
   typeDice: {fileID: 11400000, guid: 8d8e54f7fd761774c9165c5c2b3129ca, type: 2}

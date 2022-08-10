@@ -29,12 +29,13 @@ public class PrototypeManager : MonoBehaviour
     [ContextMenu("Fight")]
     public void Fight()
     {
-        // Find out type outcome
+        // Find out types
         string playerType = player.typeDice.RollDie();
         string enemyType = enemy.typeDice.RollDie();
+        TMP_results.text += "\nPlayer rolled " + playerType + " and enemy rolled " + enemyType;
 
+        // Find out who type outcome
         TypeAdvantage advantage = TypeAdvantage.Tie;
-
         if(playerType == enemyType || playerType == "Eldritch" || enemyType == "Eldritch")
         {
             advantage = TypeAdvantage.Tie;
@@ -63,27 +64,38 @@ public class PrototypeManager : MonoBehaviour
 
         // Find out power
         int playerPower = player.powerDice.RollDie();
-        Debug.Log("Player rolled Type " + playerType + " at power: " + playerPower);
         TMP_player[2].text = playerType;
         TMP_player[3].text = playerPower.ToString();
 
         int enemyPower = enemy.powerDice.RollDie();
-        Debug.Log("Enemy rolled Type " + enemyType + " at power: " + enemyPower);
         TMP_enemy[2].text = enemyType;
         TMP_enemy[3].text = enemyPower.ToString();
+        TMP_results.text += "\nPlayer rolled " + playerPower + " and enemy rolled " + enemyPower;
+
+
 
         switch (advantage)
         {
             case TypeAdvantage.Tie:
+                TMP_results.text += "\nType tie, no power dice modification.";
                 CalculateDamage(playerPower, enemyPower);
                 break;
             case TypeAdvantage.Player:
+                TMP_results.text += "\nPlayer won type, power doubled from " + playerPower + " to " + playerPower * 2;
                 CalculateDamage(playerPower * 2, enemyPower);
                 break;
             case TypeAdvantage.Enemy:
+                TMP_results.text += "\nEnemy won type, power doubled from " + enemyPower + " to " + enemyPower * 2;
                 CalculateDamage(playerPower, enemyPower * 2);
                 break;
         }
+
+        TMP_results.text += "\n---------------------------------------------------------------";
+
+        /*if(player.health > 0 && enemy.health > 0)
+        {
+            Fight();
+        }*/
 
 
     }
@@ -95,19 +107,21 @@ public class PrototypeManager : MonoBehaviour
         if(playerPower == enemyPower)
         {
             Debug.Log("Tie!");
-            TMP_results.text += "\nTie!";
+            TMP_results.text += "\nThere was a tie, no damage dealt!";
         }
-        if(playerPower > enemyPower)
+        else if(playerPower > enemyPower)
         {
-            enemy.health -= powerDif;
+            enemy.health -= 1;
             Debug.Log("Enemy took " + powerDif + " damage!");
-            TMP_results.text += "\nEnemy took " + powerDif + " damage!";
+            TMP_results.text += "\nPlayer won by: " + powerDif + "!";
+            TMP_results.text += "\nEnemy takes 1 damage!";
         }
         else
         {
-            player.health -= powerDif;
+            player.health -= 1;
             Debug.Log("Player took " + powerDif + " damage!");
-            TMP_results.text += "\nPlayer took " + powerDif + " damage!";
+            TMP_results.text += "\nEnemy won by: " + powerDif + "!";
+            TMP_results.text += "\nPlayer takes 1 damage!";
         }
 
         TMP_player[1].text = player.health.ToString();
