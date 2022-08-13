@@ -10,5 +10,6 @@ public class Character : ScriptableObject
     public int health;
     public PowerDice powerDice;
     public TypeDice typeDice;
+    public AbilityCard abilityCard;
 
 }

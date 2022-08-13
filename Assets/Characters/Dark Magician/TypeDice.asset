@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19961785bde3a4d4798fe28338343478, type: 3}
-  m_Name: PlayerTypeDice
+  m_Name: TypeDice
   m_EditorClassIdentifier: 
-  sideTypes: 000000000100000002000000000000000100000002000000
+  sideTypes: 000000000000000002000000000000000000000002000000

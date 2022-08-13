@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 11400000, guid: ae2037806efeae046b10b956e439bacb, type: 2}
-  enemy: {fileID: 11400000, guid: e4ae4e5c7630e0346b45f59fbad28839, type: 2}
+  enemy: {fileID: 11400000, guid: 1ffdd0b4f00138046adbf6def1caa752, type: 2}
   TMP_player:
   - {fileID: 404741136}
   - {fileID: 1220577642}

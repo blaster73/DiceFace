@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0432dce704b1d524ea815f3e18519137, type: 3}
+  m_Name: Dark Magician
+  m_EditorClassIdentifier: 
+  characterName: Test Enemy
+  health: 4
+  powerDice: {fileID: 11400000, guid: 3694031f873d0be4cbca13591b7a9149, type: 2}
+  typeDice: {fileID: 11400000, guid: 8d8e54f7fd761774c9165c5c2b3129ca, type: 2}

@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 48aad6e9d1c48cb418235efa13e29974, type: 3}
-  m_Name: PlayerPowerDice
+  m_Name: PowerDice
   m_EditorClassIdentifier: 
   sides: 0
