@@ -6,8 +6,10 @@ using UnityEngine;
 public class AbilityCard : ScriptableObject
 {
 
-    public enum ability {PowReroll, TypeReroll, powDouble};
+    public enum Ability {PowReroll, TypeReroll, powDouble};
 
     // Figure out slots where Ability Cards can be checked in calculated if they need to be
+
+    public Ability ability;
 
 }

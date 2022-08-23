@@ -16,3 +16,4 @@ MonoBehaviour:
   health: 6
   powerDice: {fileID: 11400000, guid: 35b6ca2b1f37ad24e95d9fcb72e8b43f, type: 2}
   typeDice: {fileID: 11400000, guid: f907ca3d265b75641bd2734abdc95613, type: 2}
+  abilityCard: {fileID: 11400000, guid: cbf30fe98b5b2e846b79b5787ff72a15, type: 2}

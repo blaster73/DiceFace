@@ -102,6 +102,23 @@ public class PrototypeManager : MonoBehaviour
 
     private void CalculateDamage(int playerPower, int enemyPower)
     {
+        if(player.abilityCard != null)
+        {
+            if(player.abilityCard.ability == AbilityCard.Ability.powDouble)
+            {
+                playerPower = playerPower * 2;
+                TMP_results.text += "\nPlayer has double Power Ability Card";
+            }
+        }
+        if(enemy.abilityCard != null)
+        {
+            if(enemy.abilityCard.ability == AbilityCard.Ability.powDouble)
+            {
+                enemyPower = enemyPower * 2;
+                TMP_results.text += "\nEnemy has double Power Ability Card";
+            }
+        }
+
         int powerDif = Mathf.Abs(playerPower - enemyPower);
 
         if(playerPower == enemyPower)
