@@ -11,19 +11,18 @@ public class PrototypeManager : MonoBehaviour
     public Character player;
     public Character enemy;
 
-    public TMP_Text[] TMP_player;
-    public TMP_Text[] TMP_enemy;
-    public TMP_Text TMP_results;
+    private PrototypeUIHandler prototypeUIHandler;
 
     void Start() {
+
+        prototypeUIHandler = GetComponent<PrototypeUIHandler>();
 
         player = Instantiate(player);
         enemy = Instantiate(enemy);
 
-        TMP_player[0].text = player.name;
-        TMP_player[1].text = player.health.ToString();
-        TMP_enemy[0].text = enemy.name;
-        TMP_enemy[1].text = enemy.health.ToString();
+        prototypeUIHandler.UpdateNames(player.name, enemy.name);
+        prototypeUIHandler.UpdateHealths(player.health.ToString(), enemy.health.ToString());
+
     }
 
     [ContextMenu("Fight")]
@@ -32,7 +31,7 @@ public class PrototypeManager : MonoBehaviour
         // Find out types
         string playerType = player.typeDice.RollDie();
         string enemyType = enemy.typeDice.RollDie();
-        TMP_results.text += "\nPlayer rolled " + playerType + " and enemy rolled " + enemyType;
+        prototypeUIHandler.PrintStuff("Player rolled " + playerType + " and enemy rolled " + enemyType);
 
         // Find out who type outcome
         TypeAdvantage advantage = TypeAdvantage.Tie;
@@ -64,33 +63,30 @@ public class PrototypeManager : MonoBehaviour
 
         // Find out power
         int playerPower = player.powerDice.RollDie();
-        TMP_player[2].text = playerType;
-        TMP_player[3].text = playerPower.ToString();
-
         int enemyPower = enemy.powerDice.RollDie();
-        TMP_enemy[2].text = enemyType;
-        TMP_enemy[3].text = enemyPower.ToString();
-        TMP_results.text += "\nPlayer rolled " + playerPower + " and enemy rolled " + enemyPower;
+
+        prototypeUIHandler.UpdateTypeAndPowers(playerType, playerPower.ToString(), enemyType, enemyPower.ToString());
+        prototypeUIHandler.PrintStuff("Player rolled " + playerPower + " and enemy rolled " + enemyPower);
 
 
 
         switch (advantage)
         {
             case TypeAdvantage.Tie:
-                TMP_results.text += "\nType tie, no power dice modification.";
+                 prototypeUIHandler.PrintStuff("Type tie, no power dice modification.");
                 CalculateDamage(playerPower, enemyPower);
                 break;
             case TypeAdvantage.Player:
-                TMP_results.text += "\nPlayer won type, power doubled from " + playerPower + " to " + playerPower * 2;
+                prototypeUIHandler.PrintStuff("Player won type, power doubled from " + playerPower + " to " + playerPower * 2);
                 CalculateDamage(playerPower * 2, enemyPower);
                 break;
             case TypeAdvantage.Enemy:
-                TMP_results.text += "\nEnemy won type, power doubled from " + enemyPower + " to " + enemyPower * 2;
+                prototypeUIHandler.PrintStuff("Enemy won type, power doubled from " + enemyPower + " to " + enemyPower * 2);
                 CalculateDamage(playerPower, enemyPower * 2);
                 break;
         }
 
-        TMP_results.text += "\n---------------------------------------------------------------";
+        prototypeUIHandler.PrintStuff("---------------------------------------------------------------");
 
         /*if(player.health > 0 && enemy.health > 0)
         {
@@ -107,7 +103,7 @@ public class PrototypeManager : MonoBehaviour
             if(player.abilityCard.ability == AbilityCard.Ability.powDouble)
             {
                 playerPower = playerPower * 2;
-                TMP_results.text += "\nPlayer has double Power Ability Card";
+                prototypeUIHandler.PrintStuff("Player has double Power Ability Card");
             }
         }
         if(enemy.abilityCard != null)
@@ -115,7 +111,7 @@ public class PrototypeManager : MonoBehaviour
             if(enemy.abilityCard.ability == AbilityCard.Ability.powDouble)
             {
                 enemyPower = enemyPower * 2;
-                TMP_results.text += "\nEnemy has double Power Ability Card";
+                prototypeUIHandler.PrintStuff("Enemy has double Power Ability Card");
             }
         }
 
@@ -124,25 +120,24 @@ public class PrototypeManager : MonoBehaviour
         if(playerPower == enemyPower)
         {
             Debug.Log("Tie!");
-            TMP_results.text += "\nThere was a tie, no damage dealt!";
+            prototypeUIHandler.PrintStuff("There was a tie, no damage dealt!");
         }
         else if(playerPower > enemyPower)
         {
             enemy.health -= 1;
             Debug.Log("Enemy took " + powerDif + " damage!");
-            TMP_results.text += "\nPlayer won by: " + powerDif + "!";
-            TMP_results.text += "\nEnemy takes 1 damage!";
+            prototypeUIHandler.PrintStuff("Player won by: " + powerDif + "!");
+            prototypeUIHandler.PrintStuff("Enemy takes 1 damage!");
         }
         else
         {
             player.health -= 1;
             Debug.Log("Player took " + powerDif + " damage!");
-            TMP_results.text += "\nEnemy won by: " + powerDif + "!";
-            TMP_results.text += "\nPlayer takes 1 damage!";
+            prototypeUIHandler.PrintStuff("Enemy won by: " + powerDif + "!");
+            prototypeUIHandler.PrintStuff("Player takes 1 damage!");
         }
 
-        TMP_player[1].text = player.health.ToString();
-        TMP_enemy[1].text = enemy.health.ToString();
+        prototypeUIHandler.UpdateHealths(player.health.ToString(), enemy.health.ToString());
 
     }
 

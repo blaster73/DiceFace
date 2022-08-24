@@ -817,6 +817,7 @@ GameObject:
   m_Component:
   - component: {fileID: 466122273}
   - component: {fileID: 466122274}
+  - component: {fileID: 466122275}
   m_Layer: 0
   m_Name: Prototype
   m_TagString: Untagged
@@ -853,6 +854,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 11400000, guid: ae2037806efeae046b10b956e439bacb, type: 2}
   enemy: {fileID: 11400000, guid: 1ffdd0b4f00138046adbf6def1caa752, type: 2}
+  TMP_player:
+  - {fileID: 404741136}
+  - {fileID: 1220577642}
+  - {fileID: 1998585745}
+  - {fileID: 293923693}
+  TMP_enemy:
+  - {fileID: 1609952611}
+  - {fileID: 389032144}
+  - {fileID: 214157978}
+  - {fileID: 1792709731}
+  TMP_results: {fileID: 1645842902}
+--- !u!114 &466122275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 466122271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e50830bad4b8240ac212e10403c49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   TMP_player:
   - {fileID: 404741136}
   - {fileID: 1220577642}
