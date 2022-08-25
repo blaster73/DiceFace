@@ -28,47 +28,15 @@ public class PrototypeManager : MonoBehaviour
     [ContextMenu("Fight")]
     public void Fight()
     {
-        // Find out types
-        string playerType = player.typeDice.RollDie();
-        string enemyType = enemy.typeDice.RollDie();
-        prototypeUIHandler.PrintStuff("Player rolled " + playerType + " and enemy rolled " + enemyType);
 
-        // Find out who type outcome
-        TypeAdvantage advantage = TypeAdvantage.Tie;
-        if(playerType == enemyType || playerType == "Eldritch" || enemyType == "Eldritch")
-        {
-            advantage = TypeAdvantage.Tie;
-        }
-        if(playerType == "Magic")
-        {
-            if(enemyType == "Radiation")
-                advantage = TypeAdvantage.Player;
-            if(enemyType == "Fire")
-                advantage = TypeAdvantage.Enemy;
-        }
-        if(playerType == "Radiation")
-        {
-            if(enemyType == "Fire")
-                advantage = TypeAdvantage.Player;
-            if(enemyType == "Magic")
-                advantage = TypeAdvantage.Enemy;
-        }
-        if(playerType == "Fire")
-        {
-            if(enemyType == "Magic")
-                advantage = TypeAdvantage.Player;
-            if(enemyType == "Radiation")
-                advantage = TypeAdvantage.Enemy;
-        }
+        TypeAdvantage advantage = FindTypeAdvantage(false);
 
         // Find out power
         int playerPower = player.powerDice.RollDie();
         int enemyPower = enemy.powerDice.RollDie();
 
-        prototypeUIHandler.UpdateTypeAndPowers(playerType, playerPower.ToString(), enemyType, enemyPower.ToString());
+        prototypeUIHandler.UpdatePowers(playerPower.ToString(), enemyPower.ToString());
         prototypeUIHandler.PrintStuff("Player rolled " + playerPower + " and enemy rolled " + enemyPower);
-
-
 
         switch (advantage)
         {
@@ -96,6 +64,66 @@ public class PrototypeManager : MonoBehaviour
 
     }
 
+    private TypeAdvantage FindTypeAdvantage(bool rolled)
+    {
+        // Find out types
+        string playerType = player.typeDice.RollDie();
+        string enemyType = enemy.typeDice.RollDie();
+        prototypeUIHandler.PrintStuff("Player rolled " + playerType + " and enemy rolled " + enemyType);
+        prototypeUIHandler.UpdateType(playerType, enemyType);
+
+        bool playerReroll = false;
+        bool enemyReroll = false;
+
+        // Check if Player or Enemy has Type Reroll Ability Card
+        if(enemy.abilityCard.ability == AbilityCard.Ability.TypeReroll){
+            enemyReroll = true;
+        }
+        if(player.abilityCard.ability == AbilityCard.Ability.TypeReroll){
+            playerReroll = true;
+        }
+
+        if(playerType == enemyType || playerType == "Eldritch" || enemyType == "Eldritch")
+        {
+            return(TypeAdvantage.Tie);
+        }
+        if(playerType == "Magic"){
+            if(enemyType == "Radiation"){
+                if(enemyReroll && !rolled){
+                    prototypeUIHandler.PrintStuff("Enemy lost and rerolled type");
+                    return(FindTypeAdvantage(true));
+                }
+                else{
+                    return(TypeAdvantage.Player);
+                }
+            }
+            if(enemyType == "Fire"){
+                if(playerReroll && !rolled){
+                    prototypeUIHandler.PrintStuff("Player lost and rerolled type");
+                    return(FindTypeAdvantage(true));
+                }
+                else{
+                    return(TypeAdvantage.Enemy);
+                }
+            }
+        }
+        if(playerType == "Radiation")
+        {
+            if(enemyType == "Fire")
+                return(TypeAdvantage.Player);
+            if(enemyType == "Magic")
+                return(TypeAdvantage.Enemy);
+        }
+        if(playerType == "Fire")
+        {
+            if(enemyType == "Magic")
+                return(TypeAdvantage.Player);
+            if(enemyType == "Radiation")
+                return(TypeAdvantage.Enemy);
+        }
+        return(TypeAdvantage.Tie);
+    }
+
     private void CalculateDamage(int playerPower, int enemyPower)
     {
         if(player.abilityCard != null)
@@ -103,7 +131,7 @@ public class PrototypeManager : MonoBehaviour
             if(player.abilityCard.ability == AbilityCard.Ability.powDouble)
             {
                 playerPower = playerPower * 2;
-                prototypeUIHandler.PrintStuff("Player has double Power Ability Card");
+                prototypeUIHandler.PrintStuff("Player has double Power Ability Card, new power: " + playerPower);
             }
         }
         if(enemy.abilityCard != null)
@@ -111,7 +139,7 @@ public class PrototypeManager : MonoBehaviour
             if(enemy.abilityCard.ability == AbilityCard.Ability.powDouble)
             {
                 enemyPower = enemyPower * 2;
-                prototypeUIHandler.PrintStuff("Enemy has double Power Ability Card");
+                prototypeUIHandler.PrintStuff("Enemy has double Power Ability Card, new power: " + enemyPower);
             }
         }
 

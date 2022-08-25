@@ -11,5 +11,6 @@ public class Character : ScriptableObject
     public PowerDice powerDice;
     public TypeDice typeDice;
     public AbilityCard abilityCard;
+    public AbilityCard[] abiliyCardInv;
 
 }

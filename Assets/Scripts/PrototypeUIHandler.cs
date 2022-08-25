@@ -34,12 +34,15 @@ public class PrototypeUIHandler : MonoBehaviour
         TMP_enemy[1].text = enemyHealth;
     }
 
-    public void UpdateTypeAndPowers(string playerType, string playerPower, string enemyType, string enemyPower)
+    public void UpdateType(string playerType, string enemyType)
     {
         TMP_player[2].text = playerType;
-        TMP_player[3].text = playerPower;
-
         TMP_enemy[2].text = enemyType;
+    }
+
+    public void UpdatePowers(string playerPower, string enemyPower)
+    {
+        TMP_player[3].text = playerPower;
         TMP_enemy[3].text = enemyPower;
     }
 }
