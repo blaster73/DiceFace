@@ -1123,7 +1123,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa3bcc78c198730489572a3dff6f1e89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathModal: {fileID: 0}
+  pathModal: {fileID: 1558889858}
+  buttons:
+  - {fileID: 1229389967}
+  - {fileID: 1369495924}
+  - {fileID: 1330061782}
+  - {fileID: 1008988834}
 --- !u!114 &466122277
 MonoBehaviour:
   m_ObjectHideFlags: 0

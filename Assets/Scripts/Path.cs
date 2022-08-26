@@ -10,15 +10,19 @@ public class Path : MonoBehaviour
     [SerializeField]
     private AbilityCard[] cards;
 
-    // Start is called before the first frame update
+    private PathUIHandler pathUIHandler;
+
     void Start()
     {
-        
+        pathUIHandler = GetComponent<PathUIHandler>();
     }
 
-    // Update is called once per frame
-    void Update()
+    [ContextMenu("Test button update")]
+    public void RandomizeNextEnemy()
     {
-        
+        int rEnemyIndex = Random.Range(0, enemies.Length);
+        int rCardIndex = Random.Range(0, cards.Length);
+
+        pathUIHandler.UpdateEnemyButtons(enemies[Random.Range(0, enemies.Length)], enemies[Random.Range(0, enemies.Length)]);
     }
 }
